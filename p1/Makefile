@@ -1,8 +1,11 @@
 CC = gcc
 CFLAGS = -c -Wall -std=c99
 
-run: error util heap main
+run: dir error util heap main
 	$(CC) -lm -o proj1 build/error.o build/util.o build/heap.o build/main.o
+
+dir:
+	mkdir -p build
 
 main: src/main.c
 	$(CC) $(CFLAGS) -o build/main.o src/main.c
