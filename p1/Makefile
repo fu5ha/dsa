@@ -1,8 +1,8 @@
 CC = gcc
-CFLAGS = -c -Wall
+CFLAGS = -c -Wall -std=c99
 
 run: error util heap main
-	$(CC) -o proj1 build/error.o build/util.o build/heap.o build/main.o
+	$(CC) -lm -o proj1 build/error.o build/util.o build/heap.o build/main.o
 
 main: src/main.c
 	$(CC) $(CFLAGS) -o build/main.o src/main.c

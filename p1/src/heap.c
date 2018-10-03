@@ -92,7 +92,7 @@ void printPrettyTree(Heap* heap) {
 void printHeap(Heap* heap) {
     printf("Capacity: %d\n", heap->capacity);
     printf("Size: %d\n", heap->size);
-    printf("Keys: \n");
+    printf("Keys: ");
     printRaw(heap);
     #ifdef PRINT_TREE
     printf("Tree View: \n");

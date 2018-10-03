@@ -4,15 +4,12 @@
 
 #include "error.h"
 
-const Error OK = (Error){0, NULL};
-const int OUT_OF_BOUNDS = 1;
-
 int IsOK(Error *e) {
     return e->kind == 0;
 }
 
 Error Ok() {
-    return OK;
+    return (Error){0, NULL};
 }
 
 Error OutOfBounds(int i, int max) {
@@ -24,11 +21,11 @@ Error OutOfBounds(int i, int max) {
 Error OverCapacity(int i, int max) {
     char* msg = (char*)malloc(20 + sizeof(char) * 41);
     sprintf(msg, "Not enough capacity: max %d, tried to use %d", max, i);
-    return (Error){1, msg};
+    return (Error){2, msg};
 }
 
 Error KeyLessThanCurrent(int current, int key) {
     char* msg = (char*)malloc(20 + sizeof(char) * 51);
     sprintf(msg, "Key in IncreaseKey less than current: current %d, new %d", current, key);
-    return (Error){1, msg};
+    return (Error){3, msg};
 }
