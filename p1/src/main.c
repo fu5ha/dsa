@@ -1,27 +1,53 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "error.h"
 #include "util.h"
 #include "heap.h"
 
 int main(int argc, char const *argv[])
 {
-    Heap heap = Initialize(15);
-    Element arr[15] = {Elem(1), Elem(2), Elem(5), Elem(10), Elem(25), Elem(19), Elem(3), Elem(45), Elem(32), Elem(15), Elem(67), Elem(22), Elem(4), Elem(33), Elem(40)};
+    Heap heap;
+    Element* arr = malloc(sizeof(Element));
+    int arr_l = 1;
 
-    Error e = BuildHeap(&heap, arr, 15, 1);
-    if (!IsOK(&e)) {
-        printf("Error: %s\n", e.msg);
+    State state = (State){0, 0, 0, 0};
+    char* msgbuf = malloc(50);
+
+    Error e = Ok();
+    while (nextCommand(&state, msgbuf)) {
+        printf("COMMAND: %s\n", msgbuf);
+        if (state.c == 'C') {
+            heap = Initialize(state.n);
+        }
+        if (state.c == 'W') {
+            printHeap(&heap);
+        }
+        if (state.c == 'I') {
+            e = Insert(&heap, state.v, state.f);
+        }
+        if (state.c == 'K') {
+            e = IncreaseKey(&heap, state.i, state.v, state.f);
+        }
+        if (state.c == 'D') {
+            e = DeleteMax(&heap, state.f);
+        }
+        if (state.c == 'R') {
+            e = ReadFile(&arr, &arr_l);
+            if (IsOK(&e)) {
+                e = BuildHeap(&heap, arr, arr_l, state.f);
+            }
+        }
+
+        if (!IsOK(&e)) {
+            printf("Error: %s\n", e.msg);
+        }
     }
 
-    e = Insert(&heap, 99, 1);
-    if (!IsOK(&e)) {
-        printf("Error: %s\n", e.msg);
-    }
+    free(msgbuf);
+    free(arr);
+    free(heap.H);
 
-    e = DeleteMax(&heap, 1);
-    if (!IsOK(&e)) {
-        printf("Error: %s\n", e.msg);
-    }
+    printf("STOPPING\n");
 
     return 0;
 }

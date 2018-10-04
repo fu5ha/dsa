@@ -29,3 +29,7 @@ Error KeyLessThanCurrent(int current, int key) {
     sprintf(msg, "Key in IncreaseKey less than current: current %d, new %d", current, key);
     return (Error){3, msg};
 }
+
+Error CannotOpenFile() {
+    return (Error){4, "Could not open file to read."};
+}

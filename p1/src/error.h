@@ -11,5 +11,6 @@ Error Ok();
 Error OutOfBounds(int i, int max);
 Error OverCapacity(int i, int max);
 Error KeyLessThanCurrent(int current, int key);
+Error CannotOpenFile();
 
 #endif

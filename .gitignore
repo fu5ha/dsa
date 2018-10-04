@@ -1,2 +1,4 @@
 **/build/
 p1/proj1
+.DS_Store
+**/.vscode/
