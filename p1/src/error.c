@@ -4,6 +4,7 @@
 
 #include "error.h"
 
+// Checks if the error contains an error or is OK
 int IsOK(Error *e) {
     return e->kind == 0;
 }
@@ -32,4 +33,20 @@ Error KeyLessThanCurrent(int current, int key) {
 
 Error CannotOpenFile() {
     return (Error){4, "Could not open file to read."};
+}
+
+Error HeapUninitialized() {
+    return (Error){5, "Heap uninitialized. Please Initialize the heap first."};
+}
+
+Error TooFewElements() {
+    return (Error){6, "There were fewer elements than specified in input file."};
+}
+
+Error DeleteZeroElements() {
+    return (Error){7, "There are no elements to delete."};
+}
+
+Error InputFileEmpty() {
+    return (Error){8, "Input file is empty or contains invalid data."};
 }
