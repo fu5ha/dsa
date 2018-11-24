@@ -1,1 +1,1 @@
-This is an implementation of the Heap data structure in pure C and with a backing array rather than using pointers. (I got permission from Dr. Xue that using pure C rather than C++ is OK).
+This is an implementation of Dijkstra's shortest path algorithm using a min-heap data structure as the priority queue and using edge adjacency lists. It is written in pure C. (I got permission from Dr. Xue that using pure C rather than C++ is OK.)
