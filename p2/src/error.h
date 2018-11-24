@@ -23,5 +23,7 @@ Error GraphUninitialized();
 Error TooFewElements();
 Error DeleteZeroElements();
 Error InputFileEmpty();
+Error CannotReach(int s, int t);
+Error NodesOutOfBounds();
 
 #endif

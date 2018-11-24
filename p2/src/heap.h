@@ -7,12 +7,11 @@
 // Type of an element inside the Heap
 typedef struct {
     int key;
-    int parent;
-    AdjNode* adj;
+    int v_idx;
 } Element;
 
 // Utility function to create an element with the given key
-Element Elem(int key);
+Element Elem(int key, int v_idx);
 
 // Struct that represents a heap
 typedef struct {
@@ -37,10 +36,10 @@ void printPrettyTree(Heap* heap);
 Error BuildHeap(Heap* heap, Element* A, int n, int flag);
 
 // Inserts an element with key k into the max heap
-Error Insert(Heap* heap, int k, int flag);
+Error Insert(Heap* heap, Element el, int flag);
 
-// Deletes the max element from the heap
-Error DeleteMax(Heap* heap, int flag);
+// Deletes the min element from the heap
+Error DeleteMin(Heap* heap, int flag);
 
 // Increases key at the index to key of value
 Error DecreaseKey(Heap* heap, int index, int value, int flag);
@@ -65,6 +64,8 @@ MaybeElement LeftChild(Heap* heap, int index);
 // not exist, we return a MaybeElement which either contains the element or
 // None if it does not exist.
 MaybeElement RightChild(Heap* heap, int index);
+
+MaybeElement FindVertex(Heap* heap, int v_idx);
 
 // Checks whether a MaybeElement contains an element or is None.
 int isSome(MaybeElement* elem);

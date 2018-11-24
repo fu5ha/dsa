@@ -9,13 +9,22 @@
 // #define PRINT_TREE
 
 // Utility function to create an element with the given key
-Element Elem(int key) {
-    return (Element){key, INT_MAX, NULL};
+Element Elem(int key, int v_idx) {
+    return (Element){key, v_idx};
 }
 
 // Utility function to get the parent element of an element with given index
 int Parent(int index) {
     return floor(((float)index - 1.0) / 2.0);
+}
+
+MaybeElement FindVertex(Heap* heap, int v_idx) {
+    for (int i = 0; i < heap->size; i++) {
+        if (heap->H[i].v_idx == v_idx) {
+            return (MaybeElement){1, i};
+        }
+    }
+    return (MaybeElement){0, -1};
 }
 
 // Utility function to get the left child of an element. Since it could exist or
@@ -310,7 +319,7 @@ void increaseCapacity(Heap* heap) {
 }
 
 // Inserts an element with key k into the min heap
-Error Insert(Heap* heap, int k, int flag) {
+Error Insert(Heap* heap, Element el, int flag) {
     // Check for uninitialized heap
     if (heap->H == NULL) {
         return HeapUninitialized();
@@ -332,10 +341,11 @@ Error Insert(Heap* heap, int k, int flag) {
     }
 
     // Set the memory in the heap's internal array to be an Element with minimum integer key
-    heap->H[index] = (Element){INT_MAX};
+    heap->H[index] = el;
+    heap->H[index].key = INT_MAX;
 
     // Use DecreaseKey operation on the element with the proper key value
-    Error e = DecreaseKey(heap, index, k, 0);
+    Error e = DecreaseKey(heap, index, el.key, 0);
     if (!IsOK(&e)) {
         return e;
     }
@@ -376,7 +386,7 @@ Error DeleteMin(Heap* heap, int flag) {
     }
 
     // Print removed element
-    printf("%d\n", keyAt(heap, heap->size - 1));
+    // printf("%d\n", keyAt(heap, heap->size - 1));
 
     // Decrease heap size to excluded swapped min
     heap->size--;

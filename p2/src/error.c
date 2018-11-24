@@ -40,7 +40,7 @@ Error HeapUninitialized() {
 }
 
 Error TooFewElements() {
-    return (Error){6, "There were fewer elements than specified in input file."};
+    return (Error){6, "There were fewer edges than specified in input file."};
 }
 
 Error DeleteZeroElements() {
@@ -53,4 +53,14 @@ Error InputFileEmpty() {
 
 Error GraphUninitialized() {
     return (Error){9, "Graph uninitialized. Please Initialize the graph first."};
+}
+
+Error CannotReach(int s, int t) {
+    char* msg = (char*)malloc(20 + sizeof(char) * 51);
+    sprintf(msg, "Node %d is not reachable from node %d", t + 1, s + 1);
+    return (Error){10, msg};
+}
+
+Error NodesOutOfBounds() {
+    return (Error){11, "One or more of the specified nodes does not exist in the graph."};
 }

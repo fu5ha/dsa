@@ -6,19 +6,25 @@
 #include "heap.h"
 
 typedef struct {
-    Heap* S;
-    Heap* V;
-    Element* vertices;
+    int p;
+    int dist;
+    AdjNode* adj;
+} Vertex;
+
+typedef struct {
+    Heap V;
+    Vertex* vertices;
     int n_v;
     int n_e;
 } Graph;
 
 Graph InitializeGraph(int n_v, int n_e);
-Error BuildGraph(Graph* g, Element* vertices);
+Error BuildGraph(Graph* g, Vertex* vertices);
 void FreeGraph(Graph* g);
 Error printGraph(Graph* g);
+Error ShortestPath(Graph* g, int s, int t, int f);
 
 void AddEdgeAdj(AdjNode* node, int neighbor, int weight);
-void AddEdge(Element* G, int node, int neighbor, int weight);
+void AddEdge(Vertex* V, int node, int neighbor, int weight);
 
 #endif

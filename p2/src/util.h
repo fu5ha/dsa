@@ -3,13 +3,13 @@
 
 #include "error.h"
 #include "heap.h"
+#include "graph.h"
 
 // Helper struct to contain input parser state
 typedef struct {
     char c;
-    int i;
-    int v;
-    int n;
+    int s;
+    int t;
     int f;
     int shouldPrint;
 } State;
@@ -18,6 +18,6 @@ typedef struct {
 int nextCommand(State* state, char* msg);
 
 // Reads and parses HEAPInput file
-Error ReadFile(Element** vertices, int* n_v, int* n_e);
+Error ReadFile(Vertex** vertices, int* n_v, int* n_e);
 
 #endif

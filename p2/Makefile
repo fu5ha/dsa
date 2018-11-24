@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -c -Wall -std=c99
+CFLAGS = -glldb -c -Wall -std=c99
 
 run: dir error util heap graph main
 	$(CC) -lm -o proj2 build/error.o build/util.o build/heap.o build/graph.o build/main.o

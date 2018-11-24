@@ -8,7 +8,7 @@ int main(int argc, char const *argv[])
 {
     // Create Heap and Element arrays for use later
     Graph graph;
-    Element* vertices = malloc(sizeof(Element));
+    Vertex* vertices = malloc(sizeof(Vertex));
     int n_v = 1;
     int n_e = 1;
 
@@ -36,6 +36,10 @@ int main(int argc, char const *argv[])
                 graph = InitializeGraph(n_v, n_e);
                 e = BuildGraph(&graph, vertices);
             }
+        }
+
+        if (state.c == 'P') {
+            e = ShortestPath(&graph, state.s - 1, state.t - 1, state.f);
         }
 
         if (!IsOK(&e)) {

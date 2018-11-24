@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <limits.h>
 #include "util.h"
-#include "graph.h"
 
 // Parses a command from stdin
 int nextCommand(State* state, char* msg) {
@@ -23,25 +22,21 @@ int nextCommand(State* state, char* msg) {
             strcpy(msg, "W\0");
             return 1;
         }
-        // if (c == 'K' || c == 'k') {
-        //     int matches = scanf("%d", &state->i);
-        //     matches += scanf("%d", &state->v);
-        //     matches += scanf("%d", &state->f);
-        //     if (matches == 3) {
-        //         state->shouldPrint = 1;
-        //         state->c = 'K';
-        //         sprintf(msg, "K %d %d %d", state->i, state->v, state->f);
-        //         return 1;
-        //     }
-        // }
-        if (c == 'R' || c == 'r') {
-            int matches = scanf("%d", &state->f);
-            if (matches != 0) {
+        if (c == 'P' || c == 'p') {
+            int matches = scanf("%d", &state->s);
+            matches += scanf("%d", &state->t);
+            matches += scanf("%d", &state->f);
+            if (matches == 3) {
                 state->shouldPrint = 1;
-                state->c = 'R';
-                sprintf(msg, "R %d", state->f);
+                state->c = 'P';
+                sprintf(msg, "P %d %d %d", state->s, state->t, state->f);
                 return 1;
             }
+        }
+
+        if (c == 'R' || c == 'r') {
+            strcpy(msg, "R\0");
+            return 1;
         }
 
         state->c = (char)0;
@@ -51,7 +46,7 @@ int nextCommand(State* state, char* msg) {
 }
 
 // Reads and parses HEAPInput file
-Error ReadFile(Element** vertices, int* n_v, int* n_e) {
+Error ReadFile(Vertex** vertices, int* n_v, int* n_e) {
     // Open the file for reading
     FILE* fptr = fopen("Ginput.txt", "r");
 
@@ -67,12 +62,10 @@ Error ReadFile(Element** vertices, int* n_v, int* n_e) {
         return InputFileEmpty();
     }
 
-    printf("%d %d\n", *n_v, *n_e);
-
     // Allocate an array of the proper size based on first line
-    (*vertices) = malloc(sizeof(Element) * (*n_v));
+    (*vertices) = malloc(sizeof(Vertex) * (*n_v));
     for (int i = 0; i < (*n_v); i++) {
-        (*vertices)[i] = Elem(INT_MAX);
+        (*vertices)[i] = (Vertex){-1, INT_MAX, NULL};
     }
 
     // Scan the number of lines for each edge
