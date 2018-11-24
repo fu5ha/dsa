@@ -7,7 +7,7 @@
 int main(int argc, char const *argv[])
 {
     // Create Heap and Element arrays for use later
-    Graph graph;
+    Graph graph = InitializeGraph(0, 0);
     Vertex* vertices = malloc(sizeof(Vertex));
     int n_v = 1;
     int n_e = 1;
