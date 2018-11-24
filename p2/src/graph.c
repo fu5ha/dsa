@@ -11,7 +11,7 @@ Graph InitializeGraph(int n_v, int n_e) {
 
 Error BuildGraph(Graph* g, Vertex* vertices) {
     g->vertices = vertices;
-    g->intialized = 1;
+    g->initialized = 1;
     Element* A = malloc(sizeof(Element) * g->n_v);
     for (int i = 0; i < g->n_v; i++) {
         A[i] = Elem(INT_MAX, i);
@@ -47,7 +47,7 @@ void AddEdge(Vertex* V, int node, int neighbor, int weight) {
 }
 
 Error printGraph(Graph* g) {
-    if (!g->initialized) {
+    if (g == NULL || !g->initialized) {
         return GraphUninitialized();
     }
 
@@ -114,7 +114,7 @@ Error Relax(Graph* g, int u, int v, int w) {
 }
 
 Error ShortestPath(Graph* g, int s, int t, int f) {
-    if (!g->initialized) {
+    if (g == NULL || !g->initialized) {
         return GraphUninitialized();
     }
 
