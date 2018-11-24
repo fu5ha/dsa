@@ -56,7 +56,10 @@ Error printGraph(Graph* g) {
         printf("%d: ", i + 1);
         AdjNode *n = g->vertices[i].adj;
         while (n != NULL) {
-            printf("(%d, %d); ", n->neighbor + 1, n->weight);
+            printf("(%d, %d)", n->neighbor + 1, n->weight);
+            if (n->next != NULL) {
+                printf("; ");
+            }
             n = n->next;
         }
         printf("\n");
