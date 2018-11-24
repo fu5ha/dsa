@@ -14,6 +14,7 @@ typedef struct {
 typedef struct {
     Heap V;
     Vertex* vertices;
+    int initialized;
     int n_v;
     int n_e;
 } Graph;
